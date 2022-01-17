@@ -7,6 +7,7 @@ export default function App() {
       <View style={styles.titleWrapper}>
         <Text style={styles.largeTitle}>Markets</Text>
       </View>
+      <View style={styles.divider} />
     </View>
   );
 }
@@ -23,5 +24,11 @@ const styles = StyleSheet.create({
   largeTitle: {
     fontSize: 24,
     fontWeight: 'bold'
+  },
+  divider: {
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: '#A9ABB1',
+    marginHorizontal: 16,
+    marginTop: 16
   }
 });
