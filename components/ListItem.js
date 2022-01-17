@@ -2,6 +2,8 @@ import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 
 const ListItem = ({ name, symbol, currentPrice, priceChangePercentage7d, logoUrl }) => {
+  const priceChangeColor = priceChangePercentage7d > 0 ? '#34C759': '#FF3B30';
+
   return (
     <TouchableOpacity>
       <View style={styles.itemWrapper}>
@@ -11,14 +13,14 @@ const ListItem = ({ name, symbol, currentPrice, priceChangePercentage7d, logoUrl
           <Image source={{ uri: logoUrl }} style={styles.image} />
           <View style={styles.titlesWrapper}>
             <Text style={styles.title}>{name}</Text>
-            <Text style={styles.subtitle}>{symbol}</Text>
+            <Text style={styles.subtitle}>{symbol.toUpperCase()}</Text>
           </View>
         </View>
 
         {/* right side */}
         <View style={styles.rightWrapper}>
-          <Text style={styles.title}>{currentPrice}</Text>
-          <Text style={[styles.subtitle, {color: 'red'}]}>{priceChangePercentage7d}</Text>
+          <Text style={styles.title}>${currentPrice.toLocaleString('en-US', { currency: 'USD' })}</Text>
+          <Text style={[styles.subtitle, {color: priceChangeColor}]}>{priceChangePercentage7d.toFixed(2)}%</Text>
         </View>
 
       </View>
