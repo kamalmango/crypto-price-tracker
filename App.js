@@ -16,6 +16,9 @@ const ListHeader = () => (
 export default function App() {
    const bottomSheetModalRef = useRef(null);
    const snapPoints = useMemo(() => ['50%'], []);
+   const openModal = () => {
+     bottomSheetModalRef.current.present()
+  }
 
   return (
     <BottomSheetModalProvider>
@@ -30,6 +33,7 @@ export default function App() {
               currentPrice={item.current_price}
               priceChangePercentage7d={item.price_change_percentage_7d_in_currency}
               logoUrl={item.image}
+              onPress={() => openModal()}
             />
           )}
           ListHeaderComponent={<ListHeader />}
