@@ -28,8 +28,6 @@ export default function App() {
     fetchMarketData();
   }, [])
 
-  console.log('dattaaaa ', data)
-
   const bottomSheetModalRef = useRef(null);
   const snapPoints = useMemo(() => ['50%'], []);
 
