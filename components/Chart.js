@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native'
 import {ChartDot, ChartPath, ChartPathProvider, ChartYLabel} from '@rainbow-me/animated-charts';
 import { useSharedValue } from 'react-native-reanimated';
@@ -7,11 +7,16 @@ export const {width: SIZE} = Dimensions.get('window');
 
 const Chart = ({ currentPrice, logoUrl, name, symbol, priceChangePercentage7d, sparkline }) => {
   const latestCurrentPrice = useSharedValue(currentPrice);
-
+  const [chartReady, setChartReady] = useState(false);
   const priceChangeColor = priceChangePercentage7d > 0 ? '#34C759': '#FF3B30';
 
   useEffect(() => {
     latestCurrentPrice.value = currentPrice;
+
+    setTimeout(() => {
+      setChartReady(true);
+    }, 0)
+
   }, [currentPrice])
 
   const formatUSD = value => {
@@ -47,11 +52,15 @@ const Chart = ({ currentPrice, logoUrl, name, symbol, priceChangePercentage7d, s
           </View>
 
         </View>
-
-        <View style={styles.chartLineWrapper}>
+       
+       { chartReady ?
+       (<View style={styles.chartLineWrapper}>
           <ChartPath height={SIZE / 2} stroke='black' width={SIZE} />
           <ChartDot style={{ backgroundColor: 'black' }} />
-        </View>
+        </View>)
+        :
+        null
+       }
 
       </View>
     </ChartPathProvider>
