@@ -40,6 +40,7 @@ export default function App() {
     <BottomSheetModalProvider>
       <SafeAreaView style={styles.container}>
         <FlatList 
+          showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item.id}
           data={data}
           renderItem={({ item }) => (
